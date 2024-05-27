@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
+use App\Controller\SignUpController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +14,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ApiResource(
+    operations: [
+    new Post(
+    controller: SignUpController::class
+    )
+    ]
+   )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -44,17 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
-
-    /**
-     * @var Collection<int, Payement>
-     */
-    #[ORM\OneToMany(targetEntity: Payement::class, mappedBy: 'user')]
-    private Collection $payements;
-
-    public function __construct()
-    {
-        $this->payements = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -179,33 +178,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Payement>
-     */
-    public function getPayements(): Collection
-    {
-        return $this->payements;
-    }
-
-    public function addPayement(Payement $payement): static
-    {
-        if (!$this->payements->contains($payement)) {
-            $this->payements->add($payement);
-            $payement->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePayement(Payement $payement): static
-    {
-        if ($this->payements->removeElement($payement)) {
-            // set the owning side to null (unless already changed)
-            if ($payement->getUser() === $this) {
-                $payement->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 }
