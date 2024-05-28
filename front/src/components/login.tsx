@@ -75,8 +75,8 @@ export default function Login() {
             <Message severity="error" text="Mot de passe est requis" />
           )}
         </div>
-        <div className="flex flex-row justify-center">
-          <Button type="submit" label="Login" className="mt-3 bg-sky-300 px-5 py-2" />
+        <div className="flex flex-col items-center">
+          <Button type="submit" label="Login" className="mt-3 mb-3 bg-sky-300 px-5 py-2" />
           {apiError && <Message severity="error" text={apiError} />}
           {apiSuccess && <Message severity="success" text={apiSuccess} />}
         </div>
