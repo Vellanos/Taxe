@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Message } from "primereact/message";
 import { Button } from "primereact/button";
-import { useRouter } from "next/navigation"; // Importez useRouter de next/navigation
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [username, setEmail] = useState("");
@@ -14,7 +14,7 @@ export default function Login() {
   const [apiError, setApiError] = useState("");
   const [apiSuccess, setApiSuccess] = useState("");
 
-  const router = useRouter(); // Utilisez useRouter pour obtenir l'objet router
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ export default function Login() {
   return (
     <div className="card">  
       <form onSubmit={handleSubmit}>
-        <h1 className="text-center mb-3 text-4xl font-bold">Login</h1>
+        <h1 className="text-center mb-3 text-4xl font-bold">Connexion</h1>
         <div className="flex flex-wrap align-items-center mb-3 gap-2">
           <label htmlFor="email" className=""></label>
           <InputText

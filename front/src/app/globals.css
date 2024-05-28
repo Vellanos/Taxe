@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.height-navbar {
+  height: calc(100dvh - 64px);
+}
+
+@media (max-width: 960px) {
+  .height-navbar {
+    height: calc(100dvh - 48px);
+  }
+}
