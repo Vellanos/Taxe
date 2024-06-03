@@ -16,7 +16,7 @@ export default function Home() {
     if (token) {
       try {
         // Décodez le token pour vérifier sa validité
-        const decodedToken = jwtDecode(token);
+        const decodedToken:any = jwtDecode(token);
         const currentTime = Date.now() / 1000;
 
         // Vérifiez si le token n'a pas expiré
