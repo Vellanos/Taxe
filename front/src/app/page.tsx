@@ -11,8 +11,7 @@ export default function Home() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log("TEST" + token);
-    
-
+  
     if (token) {
       try {
         // Décodez le token pour vérifier sa validité
