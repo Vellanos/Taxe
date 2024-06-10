@@ -40,7 +40,6 @@ class SignUpController extends AbstractController
         $userFirstName = $requestContent['firstname'];
         $userTel = $requestContent['tel'];
         $userAdresse = $requestContent['adresse'];
-        $userRole = $requestContent['roles'];
         $userRepository = $this->entityManager->getRepository(User::class);
         $registeredUser = $userRepository->findOneBy(['email' => $userEmail]);
 
@@ -54,7 +53,7 @@ class SignUpController extends AbstractController
         $newUser->setTel($userTel);
         $newUser->setAdresse($userAdresse);
         $newUser->setEmail($userEmail);
-        $newUser->setRoles($userRole);
+        $newUser->setRoles(["ROLE_USER"]);
         $newUser->setPassword(
             $this->passwordHasher->hashPassword($newUser, $userPassword)
         );

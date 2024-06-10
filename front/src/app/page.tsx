@@ -1,29 +1,26 @@
-'use client'
+"use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import Login from "@/components/login";
+import { Button } from "primereact/button";
+import Register from "@/components/Register";
 
 export default function Home() {
   const router = useRouter();
+  const [displayForm, setDisplayForm] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("TEST" + token);
-  
+
     if (token) {
       try {
-        // Décodez le token pour vérifier sa validité
-        const decodedToken:any = jwtDecode(token);
+        const decodedToken: any = jwtDecode(token);
         const currentTime = Date.now() / 1000;
-
-        // Vérifiez si le token n'a pas expiré
         if (decodedToken.exp > currentTime) {
-          // Redirigez l'utilisateur vers /profile
           router.push("/profile");
         } else {
-          // Le token a expiré, supprimez-le du local storage
           localStorage.removeItem("token");
         }
       } catch (error) {
@@ -32,9 +29,19 @@ export default function Home() {
     }
   }, [router]);
 
+  const handleToggle = () => {
+    setDisplayForm(!displayForm);
+  };
+
   return (
-    <div className="flex flex-row h-[100dvh] justify-center items-center bg-slate-100 ">
-      <Login />
+    <div className="flex flex-col h-[100dvh] justify-center items-center bg-slate-100 ">
+      {displayForm && <Login />}
+      {!displayForm && <Register />}
+      <Button
+        onClick={handleToggle}
+        className="button-hover"
+        label={displayForm ? "Pas encore inscrit ?" : "Déjà inscrit ?"}
+      />
     </div>
   );
 }
