@@ -49,9 +49,9 @@ export default function Register() {
       setFirstNameError("");
     }
 
-    if (name === "tel" && !/^\d{1,10}$/.test(value)) {
+    if (name === "tel" && !/^\d{10}$/.test(value)) {
       setTelError(
-        "Le numéro de téléphone doit contenir au maximum 10 chiffres."
+        "Le numéro de téléphone doit contenir exactement 10 chiffres."
       );
     } else {
       setTelError("");

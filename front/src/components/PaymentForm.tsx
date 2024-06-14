@@ -15,7 +15,7 @@ const PaymentForm = () => {
     email: "",
     carte_bancaire: "",
     cryptogramme: "",
-    date_expiration: new Date()
+    date_expiration: new Date(),
   });
 
   const [nomError, setNomError] = useState("");
@@ -30,7 +30,7 @@ const PaymentForm = () => {
     setFormData({ ...formData, date_expiration: date });
   };
 
-  const handleChange = (e: { target: { name: string; value: string; }; }) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
@@ -49,9 +49,9 @@ const PaymentForm = () => {
     }
 
     // Validation du numéro de téléphone avec une regex
-    if (name === "telephone" && !/^\d{1,10}$/.test(value)) {
+    if (name === "telephone" && !/^\d{10}$/.test(value)) {
       setTelephoneError(
-        "Le numéro de téléphone doit contenir au maximum 10 chiffres."
+        "Le numéro de téléphone doit contenir exactement 10 chiffres."
       );
     } else {
       setTelephoneError("");
@@ -103,7 +103,7 @@ const PaymentForm = () => {
     }
   };
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log(formData);
   };
