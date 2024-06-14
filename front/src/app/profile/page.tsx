@@ -75,8 +75,6 @@ export default function Profile() {
       <UserInfoContainer userInfo={userInfo} />
       <h2 className="m-4 text-2xl font-bold">Payer une taxe</h2>
       <TaxeCode />
-      <h2 className="m-4 text-2xl font-bold">Résumé de vos paiements</h2>
-      <TaxeCode />
       <div className="flex justify-center mb-2">
         <Logout />
       </div>

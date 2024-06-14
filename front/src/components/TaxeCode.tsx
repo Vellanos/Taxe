@@ -8,6 +8,7 @@ export default function TaxeCode() {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const messages = useRef(null);
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     if (errorMessage) {
@@ -17,13 +18,44 @@ export default function TaxeCode() {
     }
   }, [errorMessage]);
 
-  const handleSubmit = (e) => {
+  const validateInput = (value) => {
+    const pattern = new RegExp(`^[A-Z]{2}${currentYear}_\\d{1,2}_\\d{1,2}$`);
+    const match = value.match(pattern);
+
+    if (!match) {
+      return "Le format du numéro de règlement est incorrect.";
+    }
+
+    const [_, lettre1, lettre2, num1, num2] = value.match(new RegExp(`^([A-Z])([A-Z])${currentYear}_(\\d{1,2})_(\\d{1,2})$`));
+    const chiffre1 = parseInt(num1);
+    const chiffre2 = parseInt(num2);
+
+    if (lettre1 >= lettre2) {
+      return "La première lettre doit précéder la seconde dans l'alphabet.";
+    }
+
+    if (chiffre1 + chiffre2 !== 100) {
+      return "La somme des deux chiffres séparés par un underscore doit être égale à 100.";
+    }
+
+    return null;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (inputValue.length > 12 || inputValue.length < 12) {
-      setErrorMessage("La valeur doit être une chaîne de caractères de 12 caractères maximum.");
+    const error = validateInput(inputValue);
+    if (error) {
+      setErrorMessage(error);
     } else {
       setErrorMessage(null);
-      alert(`Input value: ${inputValue}`);
+      try {
+        const response = await fetch(`http://localhost:8000/api/contraventions?page=1&code=${inputValue}`);
+        const data = await response.json();
+        console.log(data['hydra:member'][0]);
+      } catch (error) {
+        console.error("Erreur lors de l'appel API:", error);
+        setErrorMessage("Erreur lors de l'appel API. Veuillez réessayer plus tard.");
+      }
     }
   };
 
@@ -38,7 +70,7 @@ export default function TaxeCode() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className="border border-gray-300 rounded-md p-2 w-48 mb-4"
-          placeholder="Enter value"
+          placeholder={`Enter value (e.g. AB${currentYear}_12_88)`}
         />
         <button
           type="submit"
