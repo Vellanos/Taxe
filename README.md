@@ -22,6 +22,8 @@ cd back
 symfony server:start
 ```
 
+Après avoir créer la base de données, exécuter la requête SQL data.sql pour avoir un code de contravention valide pour vos tests. 
+
 # Contexte du projet
 
 L'entreprise pour laquelle vous travaillez souhaite vous faire développer un MVP (Minimum Viable Product) commandé par l'État et destiné à la relève de paiement de taxes en tout genre.
