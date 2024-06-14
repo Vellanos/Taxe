@@ -3,8 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Messages } from 'primereact/messages';
 import 'primeicons/primeicons.css';
+import { useRouter } from "next/navigation";
 
 export default function TaxeCode() {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const messages = useRef(null);
@@ -51,7 +53,8 @@ export default function TaxeCode() {
       try {
         const response = await fetch(`http://localhost:8000/api/contraventions?page=1&code=${inputValue}`);
         const data = await response.json();
-        console.log(data['hydra:member'][0]);
+        router.push("/payment"); 
+        // Redirection sans les données de la taxe récupérer en amont (vers un le template de paiement)
       } catch (error) {
         console.error("Erreur lors de l'appel API:", error);
         setErrorMessage("Erreur lors de l'appel API. Veuillez réessayer plus tard.");
