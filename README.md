@@ -1,3 +1,27 @@
+## Brief 10 - 
+### Commande à effectuer :
+
+Après avoir cloner le projet, ouvrir deux terminales :
+
+Terminal Front
+```shell
+cd front
+```
+
+```shell
+npm run dev
+```
+
+Terminal Back
+
+```shell
+cd back
+```
+
+```shell
+symfony server:start
+```
+
 # Contexte du projet
 
 L'entreprise pour laquelle vous travaillez souhaite vous faire développer un MVP (Minimum Viable Product) commandé par l'État et destiné à la relève de paiement de taxes en tout genre.
