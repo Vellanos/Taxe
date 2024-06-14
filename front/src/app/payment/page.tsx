@@ -10,7 +10,6 @@ export default function Profile() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("TEST" + token);
 
     if (token) {
       try {

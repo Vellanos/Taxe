@@ -40,7 +40,6 @@ export default function Profile() {
               throw new Error("Network response was not ok.");
             })
             .then((data) => {
-              console.log(data['hydra:member'][0]);
               
               setUserData(data['hydra:member'][0]);
             })

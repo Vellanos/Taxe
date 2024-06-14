@@ -105,7 +105,6 @@ const PaymentForm = () => {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log(formData);
   };
 
   return (

@@ -44,8 +44,8 @@ function luhnAlgorithm($cardNumber) {
 
 
 $validRegulationNumber = "KW2024_22_78";
-$invalidRegulationNumberLetters = "ZA2024_22_78";
-$invalidRegulationNumberDate = "KW2023_22_78";
+$invalidRegulationNumberLetters = "WK2024_22_78";
+$invalidRegulationNumberDate = "KW2000_22_78";
 $invalidRegulationNumberSum = "KW2024_22_55";
 
 $validCardNumber = "4532015112830366";

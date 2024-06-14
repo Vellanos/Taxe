@@ -53,6 +53,7 @@ export default function TaxeCode() {
       try {
         const response = await fetch(`http://localhost:8000/api/contraventions?page=1&code=${inputValue}`);
         const data = await response.json();
+        console.log(data['hydra:member'][0]);
         router.push("/payment"); 
         // Redirection sans les données de la taxe récupérer en amont (vers un le template de paiement)
       } catch (error) {
